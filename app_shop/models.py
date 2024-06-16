@@ -71,6 +71,14 @@ class Category(models.Model):
             self.slug = slugify(random_slug() + '-' + self.name)
         super(Category, self).save(*args, **kwargs)
         
+    def get_absolute_url(self):
+        """
+        Return the absolute URL of the category.
+
+        """
+        
+        return reverse('shop:category_list', args=[str(self.slug)])
+        
         
 class Product(models.Model):
     """
@@ -124,6 +132,14 @@ class Product(models.Model):
         
     def __str__(self):
         return self.name
+    
+    def get_absolute_url(self):
+        """
+        Return the absolute URL of the product.
+        
+        """
+        return reverse('shop:product_detail', args=[str(self.slug)])
+    
    
 
 class ProductManager(models.Manager):

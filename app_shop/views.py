@@ -15,7 +15,10 @@ def product_detail(request, slug):
 
 def category_list(request, slug):
     category = get_object_or_404(Category, slug=slug)
-    products = ProductProxy.objects.select_related('category').filter(category=category)
+    subcategories = category.get_all_subcategories()
+    subcategories_ids = [subcat.id for subcat in subcategories]
+    subcategories_ids.append(category.id)
+    products = ProductProxy.objects.select_related('category').filter(category_id__in=subcategories_ids)
     context = {
         'category': category,
         'products': products

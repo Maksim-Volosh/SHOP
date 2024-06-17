@@ -78,6 +78,16 @@ class Category(models.Model):
         """
         
         return reverse('shop:category_list', args=[str(self.slug)])
+    
+    def get_all_subcategories(self):
+        """
+        Return all the subcategories of the category.
+
+        """
+        subcategories = list(self.children.all())
+        for subcategory in subcategories:
+            subcategories.extend(subcategory.get_all_subcategories())
+        return subcategories
         
         
 class Product(models.Model):

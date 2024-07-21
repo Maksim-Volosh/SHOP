@@ -19,6 +19,10 @@ INSTALLED_APPS = [
     
     # Our apps
     'app_shop.apps.AppShopConfig',
+    'app_cart.apps.AppCartConfig',
+    
+    # Utils
+    'mathfilters',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +51,7 @@ TEMPLATES = [
                 
                 # Our context processors
                 'app_shop.context_processors.categories',
+                'app_cart.context_processors.cart',
             ],
         },
     },
